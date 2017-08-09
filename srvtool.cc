@@ -44,7 +44,7 @@ extern "C" {
   int stty(int, struct sgttyb *);
 #endif
 #endif
-  
+
 // int getuid();
 };
 
@@ -130,14 +130,14 @@ saveResults()
   */
 
   tmpSnum = curSectionNum;
-  tmpQnum = curQueryNum; 
+  tmpQnum = curQueryNum;
 
   curSectionNum = 1;
   curQueryNum   = 1;
   theSurvey->gotoSection(curSectionNum);
   thisSection = theSurvey->get_current_section();
   thisSection->gotoQuery(curQueryNum);
-  
+
   for (i =0; i < maxQuestions; i++)
   {
     if (!allResponses[i])
@@ -154,9 +154,9 @@ saveResults()
     if (i < (maxQuestions-1))
       moveAhead1();
   }
-  
+
   theResults->setBookmark(tmpSnum, tmpQnum, raw_loc);
-  
+
   fp = fopen(result_file_name, "w");
   if (fp)
   {
@@ -182,7 +182,7 @@ drawPage(char *txt, int n)
   {
     printw("%c", txt[i]);
     getyx(winMain, y, x);
-    if (y > (LINES - 4)) 
+    if (y > (LINES - 4))
     {
       return i+1;
     }
@@ -198,7 +198,7 @@ drawIntroScreen()
   char *introtext = theSurvey->getIntro();
   int i;
   int last_char;
-  
+
   clear();
 
   last_char = 1;
@@ -206,13 +206,13 @@ drawIntroScreen()
   {
     clear();
     move(2, 0);
-    
+
     if (last_char == 1)
       last_char = 0;
-    
+
     last_char = drawPage(introtext, last_char);
     smart_box(winMain, 0, 0, LINES - 1, COLS);
-    
+
     move(LINES-2, 27);
     printw("Press the ");
     standout();
@@ -239,7 +239,7 @@ drawIntroScreen()
       }
     }
   }
-  
+
   if (caughtResize)
   {
     caughtResize = 0;
@@ -253,7 +253,7 @@ drawInfoScreen()
   FILE *info_fp = fopen("./srv.info", "r");
   int result;
   int cnt, last_char;
-  
+
   char ch, tmp;
   char infoText[8192];
 
@@ -304,7 +304,7 @@ drawInfoScreen()
       }
     }
   }
-  
+
   if (caughtResize)
   {
     caughtResize = 0;
@@ -317,20 +317,20 @@ drawThankyouScreen()
 {
   FILE *thanks_fp = fopen("./srv.thanks", "r");
   int result;
-  
+
   char ch, tmp;
-  
+
   result = fscanf(thanks_fp, "%c", &tmp);
 
   printf("\n");
-  
+
   while (result != EOF)
   {
     printf("%c", tmp);
     result = fscanf(thanks_fp, "%c", &tmp);
   }
   printf("\n");
-  
+
   fclose(thanks_fp);
 }
 
@@ -460,7 +460,7 @@ displayChoices(int y, int numChoices, P_tp_choice choices, int selected[])
 {
   int i, l, j;
   int hON;
-  
+
   char txt[1024];
   wmove(winQuery, y, 0);
 
@@ -485,12 +485,12 @@ displayChoices(int y, int numChoices, P_tp_choice choices, int selected[])
 	else
 	  if (txt[j] != ' ')
 	    hON = 1;
-      
+
 	if (hON)
 	  wstandout(winQuery);
 	else
 	  wstandend(winQuery);
-	
+
 	wprintw(winQuery, "%c", txt[j]);
       }
       wstandend(winQuery);
@@ -512,19 +512,18 @@ displayRankedItems(int y, int n, P_tp_choice choices,
 		   int selected[], QUEUE<int> *rQueue)
 {
   int i, j;
-  
+
   int tx, ty;
-  
+
   QUEUE<int> tQueue(MAX_CHOICES);
 
   int marked[MAX_CHOICES];
 
   for (i = 0; i < MAX_CHOICES; i++)
     marked[i] = 0;
-  
-  
+
   wmove(winQuery, y, 0);
-  
+
   while ((j = rQueue->next()))
   {
     wprintw(winQuery, "  ");
@@ -532,7 +531,7 @@ displayRankedItems(int y, int n, P_tp_choice choices,
     tQueue.add(j);
     wprintw(winQuery, "%1d.  %s\n", j, choices[j-1].text);
     marked[j-1] = 1;		// mark this one as already being printed
-    wstandend(winQuery);    
+    wstandend(winQuery);
   }
 
   for (i = 0; i < n; i++)
@@ -541,7 +540,6 @@ displayRankedItems(int y, int n, P_tp_choice choices,
       wprintw(winQuery, "  %1d.  %s\n", i+1, choices[i].text);
   }
 
-  
   // put the original queue back together again
   while ((j = tQueue.next()))
     rQueue->add(j);
@@ -570,7 +568,7 @@ getText(char *header_text, char *prev_text)
   int xOrig, yOrig;
 
   int i;
-  
+
   char ch;
   char iText[4096];
 
@@ -606,7 +604,7 @@ getText(char *header_text, char *prev_text)
 
     getyx(winQuery, yPos, xPos);
     getmaxyx(winQuery, yMax, xMax);
-    
+
     if ((ch > 31) && (ch < 127))         // printable character?
     {
       if (numChars < 4093)
@@ -614,7 +612,7 @@ getText(char *header_text, char *prev_text)
 	/*
 	** word wrap code
         */
-	
+
 	if (xPos == (xMax - 1))
 	{
 	  /*
@@ -638,7 +636,7 @@ getText(char *header_text, char *prev_text)
 
 	      *end_of_last_word++ = ch;
 	      *end_of_last_word   = '\0';
-	      
+
 	      numChars += 2;
 
 	      wmove(winQuery, 1, 0);
@@ -673,7 +671,7 @@ getText(char *header_text, char *prev_text)
 	{
 	  iText[numChars++] = ch;
 	  iText[numChars]   = '\0';
-      
+
 	  wprintw(winQuery, "%c", ch);
 	  wrefresh(winQuery);
 	}
@@ -694,7 +692,7 @@ getText(char *header_text, char *prev_text)
 	iText[numChars++] = 10;
 	iText[numChars++] = ch;
 	iText[numChars]   = '\0';
-      
+
 	wprintw(winQuery, "\n");
 	wrefresh(winQuery);
       }
@@ -761,7 +759,7 @@ getText(char *header_text, char *prev_text)
     else if (ch == killchar())			       // kill line???
     {
       while (yPos - yOrig)
-      {	
+      {
 	wmove(winQuery, yPos--, 0);
 	wclrtoeol(winQuery);
       }
@@ -787,14 +785,14 @@ getShortText()
   int xPos, yPos;
   int xMax, yMax;
   int xOrig, yOrig;
-  
+
   char ch;
   char iText[4096];
   iText[0] = '\0';
 
   wprintw(winQuery, "\n\nYour Answer? ");
   wrefresh(winQuery);
-  
+
   getyx(winQuery, yOrig, xOrig);
 
   while (!done)
@@ -810,7 +808,7 @@ getShortText()
 
     getyx(winQuery, yPos, xPos);
     getmaxyx(winQuery, yMax, xMax);
-    
+
     if ((ch > 31) && (ch < 127))                       // printable character?
     {
       iText[numChars++] = ch;
@@ -842,7 +840,7 @@ getShortText()
     else if (ch == 21)
     {
       while (yPos - yOrig)
-      {	
+      {
 	wmove(winQuery, yPos--, 0);
 	wclrtoeol(winQuery);
       }
@@ -864,19 +862,19 @@ ranker()
   P_tp_choice choices = thisAnswer->getchoices();
   int numToRank       = thisAnswer->getnumch();
   int numRanked       = 0;
-  
+
   int ox, oy;
   int xp, yp;
 
   int selected[MAX_CHOICES];
   int *copy_of_selected = new int[MAX_CHOICES];
-  
+
   QUEUE<int> rQueue(MAX_CHOICES);
   QUEUE<int> tQueue(MAX_CHOICES);
-  
+
   for (i = 0; i < MAX_CHOICES; i++)
     selected[i] = copy_of_selected[i] = 0;
-  
+
   getyx(winQuery, oy, ox);
 
   displayRankedItems(oy+2, numToRank, choices, selected, &rQueue);
@@ -929,7 +927,7 @@ ranker()
 	  if (j != (i+1))
 	    tQueue.add(j);
 	}
-	
+
 	while ((i = tQueue.next()))
 	  rQueue.add(i);
 
@@ -960,7 +958,7 @@ ranker()
       getyx(winQuery, oy, ox);
       drawQueryScreen();
     }
-    
+
     displayRankedItems(oy+2, numToRank, choices, selected, &rQueue);
     wprintw(winQuery, "\nRank Highest to Lowest : ");
     j = 0;
@@ -970,13 +968,13 @@ ranker()
       j++;
       if (j < numToRank)
 	wprintw(winQuery, ", ");
-      
+
       tQueue.add(i);
     }
-    
+
     while ((i = tQueue.next()))
       rQueue.add(i);
-    
+
     wclrtoeol(winQuery);
     wrefresh(winQuery);
   } /* while !done */
@@ -1004,12 +1002,12 @@ chooser(int *prev_selected)
   int minSelect       = thisAnswer->getminch();
   int maxSelect       = thisAnswer->getmaxch();
   int numSelected     = 0;
-  
+
   int topXpos, topYpos;
 
   QUEUE<int> iQueue(MAX_CHOICES);
   QUEUE<int> tQueue(MAX_CHOICES);
-  
+
   curState = IN_CHOOSER;
 
   getyx(winQuery, topYpos, topXpos);
@@ -1050,16 +1048,16 @@ chooser(int *prev_selected)
     j++;
     if (j < maxSelect)
       wprintw(winQuery, ", ");
-    
+
     tQueue.add(i);
   }
-  
+
   while ((i = tQueue.next()))
     iQueue.add(i);
-  
+
   wclrtoeol(winQuery);
   wrefresh(winQuery);
-  
+
   done = 0;
   while (!done)
   {
@@ -1125,7 +1123,7 @@ chooser(int *prev_selected)
 	  if (j != (i+1))
 	    tQueue.add(j);
 	}
-	
+
 	while ((i = tQueue.next()))
 	  iQueue.add(i);
 
@@ -1148,7 +1146,7 @@ chooser(int *prev_selected)
       getyx(winQuery, topYpos, topXpos);
       drawQueryScreen();
     }
-    
+
     displayChoices(topYpos+2, numChoices, choices, selected);
     wprintw(winQuery, "\nYour Choice, (1-%d)? ", numChoices);
 
@@ -1159,17 +1157,17 @@ chooser(int *prev_selected)
       j++;
       if (j < maxSelect)
 	wprintw(winQuery, ", ");
-      
+
       tQueue.add(i);
     }
-    
+
     while ((i = tQueue.next()))
       iQueue.add(i);
-    
+
     wclrtoeol(winQuery);
     wrefresh(winQuery);
   }
-  
+
   // at this point in time, we should update the exclude list based on
   // what the user has selected.  This is fairly straght forward.
 
@@ -1188,7 +1186,7 @@ chooser(int *prev_selected)
 
   for (i = 0; i < MAX_CHOICES; i++)
     copy_of_selected[i] = selected[i];
-  
+
   thisResponse->setData(j, copy_of_selected);
   delete copy_of_selected;
   return 0;
@@ -1231,9 +1229,7 @@ getAnswer()
   int  *orig_choices = (int *) 0;
   char *orig_text    = (char *) 0;
   char *existing_comment = (char *) 0;
-  
 
-  
   thisAnswer = thisSection->get_current_answer();
   queryType = thisAnswer->get_atype();
 
@@ -1258,9 +1254,9 @@ getAnswer()
   }
 
   thisResponse->setType(queryType);
-  
+
   while (!done) {
-    
+
     switch (queryType)
     {
     case CHOOSE:
@@ -1271,7 +1267,7 @@ getAnswer()
       {
 	return 0;
       }
-      
+
       break;
     case TEXT:
       curState = IN_TEXT;
@@ -1287,17 +1283,17 @@ getAnswer()
 	  setToPrevious();
 	else
 	  setToNext();
-	
+
 	PrevOrNext = 0;
 	return 0;
       }
-      
+
       break;
     case SHORT_TEXT:
       curState = IN_SHORT_TEXT;
       drawQueryScreen();
       thisResponse->setData(getShortText());
-      
+
       if (PrevOrNext)
       {
 	updateExcludes();
@@ -1305,7 +1301,7 @@ getAnswer()
 	  setToPrevious();
 	else
 	  setToNext();
-	
+
 	PrevOrNext = 0;
 	return 0;
       }
@@ -1324,7 +1320,7 @@ getAnswer()
        the current question.  Pop a dialog box prompting the user for what
        he or she would like to do next.
 */
-    
+
     ch = dialog(winQuery, LINES, COLS);
 
     switch (ch)
@@ -1343,7 +1339,7 @@ getAnswer()
       thisResponse->
 	setComment(
                    getText(COMMENTMSG, existing_comment));
-      
+
       done = 1;
       break;
     case 'r':
@@ -1358,7 +1354,7 @@ getAnswer()
       break;
     }
   }
-  
+
   if (questionNumber == maxQuestions)
     return 1;
   else
@@ -1385,7 +1381,7 @@ void adjust_window(int dummy)
 
   endwin();
   delete(winMain);
-  
+
   // then reset the screen
 
   winMain = initscr();
@@ -1426,10 +1422,10 @@ sect_excluded(int n)
 {
   int i;
   char *sname;
-  
+
   theSurvey->gotoSection(n);
   sname = theSurvey->get_current_section_name();
-  
+
   for ( i = 0; i < numExcluded; i++ )
     if (strcmp(sname, thoseExcluded[i]) == 0)
       {
@@ -1446,9 +1442,9 @@ query_excluded(int s, int q)
 {
   int i;
   char *qname;
-  
+
   qname = allQueries[s][q]->getname();
-  
+
   for ( i = 0; i < numExcluded; i++ )
     if (strcmp(qname, thoseExcluded[i]) == 0)
       {
@@ -1469,11 +1465,11 @@ updateExcludes()
   P_QUERY tq;
   P_tp_choice pch;
   int i, j;
-  
+
   int *choyces;
 
   numExcluded = 0;
-  
+
   rn = 0;
   for (sn = 0; sn < numSections; sn++)
   {
@@ -1500,7 +1496,7 @@ updateExcludes()
 	      choyces = allResponses[rn]->getChoiceRankData();
 	      tq = allQueries[sn][qn];
 	      pch= tq->getanswer()->getchoices();
-	      
+
 	      for (i = 0; i < 10; i++)
 		if (choyces[i])
 		{
@@ -1530,7 +1526,7 @@ excluded_query()
   for ( i = 0; i < numExcluded; i++ )
     if (strcmp(curQuery->getname(), thoseExcluded[i]) == 0)
       return 1;
-  
+
   return 0;
 }
 
@@ -1564,12 +1560,12 @@ is_continuing()
   int i, bad_input = 1, mid_done;
   char ch;
   char *temp_text;
-  
+
   struct stat buf;
   char **saved_excludes;
-  
+
   sprintf(result_file_name, "%s/%d", result_file_dir, uid);
-  
+
   // check to see if this file already exists
 
   int exists = stat(result_file_name, &buf);
@@ -1577,7 +1573,7 @@ is_continuing()
   if (exists == 0) 		// the file already exists, catch up time...
   {
     // get the number of answered questions from the result structure
-    
+
     fp_results = fopen(result_file_name, "r");
     theResults->readFromDisk(fp_results);
     fclose(fp_results);
@@ -1640,7 +1636,7 @@ is_continuing()
     else
     {
       clear();
-      
+
       move(LINES/2 - 4, 2);
       printw("Welcome back to the survey!");
       move(LINES/2 - 2, 2);
@@ -1653,7 +1649,7 @@ is_continuing()
       printw("Do you wish to erase your original answers and re-take");
       move(LINES/2 + 3, 2);
       printw("the survey (y/n)? ");
-      
+
       refresh();
       while (bad_input)
       {
@@ -1672,7 +1668,6 @@ is_continuing()
 	  temp_text = theSurvey->getname();
 	  theResults = new RESULT(temp_text, maxQuestions);
 	  delete temp_text;
-
 
 	  for (i =0; i < maxQuestions; i++)
 	  {
@@ -1704,7 +1699,7 @@ moveBack1()
 {
   curQueryNum--;
   questionNumber--;
-  
+
   if (curQueryNum < 1)
   {
     if (curSectionNum > 1)
@@ -1725,7 +1720,7 @@ moveBack1()
   theSurvey->gotoSection(curSectionNum);
   thisSection = theSurvey->get_current_section();
   thisSection->gotoQuery(curQueryNum);
-  
+
   thisResponse = allResponses[questionNumber-1];
 }
 
@@ -1735,7 +1730,7 @@ moveAhead1()
 {
   curQueryNum++;
   questionNumber++;
-  
+
   if (curQueryNum > qpSection[curSectionNum-1])
   {
     if (curSectionNum < theSurvey->getNumSections())
@@ -1819,7 +1814,7 @@ main(int argc, char *argv[], char *environ[])
   char *temp_text;
 
   int section_result, query_result;
-  
+
   void die(int code);
 
   switch (argc)
@@ -1844,7 +1839,7 @@ main(int argc, char *argv[], char *environ[])
     perror("ERROR: cannot find the survey: ");
     exit(1);
   }
-  
+
   theSurvey = new (SURVEY);
   theSurvey->readFromDisk(fp);
   fclose(fp);
@@ -1855,7 +1850,7 @@ main(int argc, char *argv[], char *environ[])
 
   maxQuestions = countQueries(theSurvey, allQueries,
 			      &numSections, qpSection);
-  
+
   temp_text = theSurvey->getname();
   theResults = new RESULT(temp_text, maxQuestions);
   delete temp_text;
@@ -1879,8 +1874,8 @@ main(int argc, char *argv[], char *environ[])
   // facist I/O control commands
 
   cbreak();  noecho();  nonl();
-//  raw();
-  
+  //  raw();
+
   // tell curses what to do in case of a control-c and
   // what to do with with resize signals
 
@@ -1892,8 +1887,8 @@ main(int argc, char *argv[], char *environ[])
 
   (void) sigvec(SIGWINCH, &sv_resize, (struct sigvec *)NULL);
 
-//  signal(SIGWINCH, adjust_window);
-  
+  //  signal(SIGWINCH, adjust_window);
+
   // clear the screen and begin
 
   // find out whether or not this user has already taken/started the
@@ -1947,13 +1942,13 @@ main(int argc, char *argv[], char *environ[])
     curState = IN_QUERY;
     done = getAnswer();
   }
-  
+
   curState = NORMAL;
 
   // add the excludes to the results and write out the results to a file
 
   theResults->markCompleted();  // tell the file that the user is done
- 
+
   saveResults();
 
   // say goodbye and exit
