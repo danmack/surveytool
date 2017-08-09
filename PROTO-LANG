@@ -1,0 +1,96 @@
+# this is an example of the survey description
+# language (SDL).  The lisp like format seems the cleanest for
+# dealing with such a heavily text laden language; plus it's easy
+# to parse <8-).
+
+# the following are the basic components
+#
+# (survey SURVEY_NAME)
+#	Unique name for the survey, used in reporting,
+#	and it is displayed when the tool is running
+#
+# (query QNAME (question ...) (answer ...))
+#	A query which consists of a question/answer pair
+#
+# (question QTEXT
+#	Let's the program now what to ask the user,
+#
+# (answer ATYPE)
+#	ATYPE can be one of the following TEXT,SHORT-TEXT,CHOOSE
+#	boxes, or ATEXT is a newline separated list of choices in the case
+#	of choose
+
+
+(survey "EXAMPLE SURVEY")
+
+(query "test" (question "Rank the following items in order
+of the most liked to the least liked:")
+ (answer rank ("apple")("orange")("carrot")("tomato")("celery")))
+
+(query "rank food in order of importance"
+  (question "Rank the following food items:")
+  (answer RANK ("lentils")("carrots")("black beans")("split peas")))
+
+(query "have workstation"
+ (question "Do you have a workstation?")
+ (answer choose
+  ("Yes")
+  ("No" exclude("hostname","swap space","rank system aspects"))
+  ("Not sure, explain in comments if necessary")
+ )
+)
+
+(query "hostname"
+ (question "What is your workstation's name?")
+ (answer short-text)
+)
+
+(query "swap space"
+ (question "How often do you run
+ out of memory/swap
+ space?"
+)
+ (answer choose 1 ..
+  ("Never" exclude("big apps"))
+  ("Very rarely" exclude("big apps"))
+  ("Once a week")
+  ("Once a month"))
+)
+
+(query "big apps"
+ (question "Do you run memory intensive apps on your workstation?")
+ (answer choose
+  ("Yes")
+  ("No")
+  ("Not sure")
+  )
+ )
+
+(query "rank system aspects"
+ (question "Please rank by importance the following system aspects:")
+ (answer rank
+    ("More workstation memory")   ("More workstation temporary space")
+    ("More home directory space") ("Faster workstation performance")
+    ("Faster network performance")))
+    
+(query "user type"
+ (question "What type of user are you?")
+ (answer choose
+  ("Local, Software Division")
+  ("Remote, Software Division")
+  ("Remote, non Software Division" exclude("printers","noise"))
+  ("Other, please explain in comment section below")
+ )
+)
+
+(query "response quality"
+ (question "How would you rate our response times?")
+ (answer choose
+  ("good")
+  ("average")
+  ("poor")
+  ("outstanding")
+  ("unacceptable")
+ )
+)
+

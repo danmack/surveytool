@@ -1,0 +1,21 @@
+This file describes what actions are taken place at certain states in
+the scanner/compiler.
+						In	 In
+STATE	ACTION					classes  Scanner
+------	--------------------------------------	-------  -------
+16	SURVEY::setname(STRING)			  y
+31	QUERY::setname(STRING)			  y
+46	QUESTION::setname(STRING)		  y
+
+51	ANSWER::settype(INTEGER)		  y
+52	ANSWER::settype(FLOAT)			  y
+53	ANSWER::settype(TEXT)			  y
+54	ANSWER::settype(SHORT_TEXT)		  y
+60	ANSWER::settype(CHOOSE)			  y
+62	ANSWER::addchoice(STRING)		  y
+64	ANSWER::setminch(INT)			  y
+65	ANSWER::setmaxch(MAX_CHOICES)		  y
+66	ANSWER::setmaxch(INT)			  y
+72	ANSWER::addexclude(STRING)		  y
+80	ANSWER::settype(RANK)			  y
+82	ANSWER::addchoice(STRING)		  y

@@ -1,0 +1,8 @@
+*.dSYM
+*.dSYM/
+*.o
+srv
+rpgen
+scc
+scc.cc
+obj-survey

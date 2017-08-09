@@ -1,0 +1,44 @@
+			   Survey Tool User's Guide
+
+Creating a Survey
+
+  Survey's are described with the Survey Description Language (SDL).  SDL is a
+  very simple language that resembles lisp.  Once a survey is 'coded' in SDL,
+  the file containing it is compiled using the 'scc' command.  This creates a
+  file called survey.out which the survey tool eventually uses to execute the
+  survey.
+
+  Here is a very simple, 1 question survey:
+
+	#
+	# sharps are comments
+	#
+
+	# blank lines are ignored
+
+	# 1st, name the survey, write the name 
+	# enclosed in quotes
+
+	(survey "Happy or not Survey")
+
+	# next, a list of queries is listed
+
+	# a query takes the form of
+	# (query STRING
+	#  (question STRING)
+	#  (answer ATYPE [ATYPE MODIFIER] [CHOICES...]))
+	#
+	# If ATYPE is either of CHOICE or RANK
+	(query "Are you Happy"
+	 (question
+	"Rumor has it that you are not happy.  How happy
+	are you exactly ?")
+	 (answer CHOOSE 1
+	  ("Incredibly") ("Very") ("Somewhat") ("Your not happy")))
+
+  After typing this in, we compile it:
+
+	% scc happy.sdl
+	wrote 1773708 bytes to survey.out
+	write returned 1773708, open returned 4
+	% survey

@@ -1,0 +1,373 @@
+
+answer.h,531
+#define _ANSWER_5,70
+#define _ANSWER_VERSION_ 11,148
+#define NUM_ATYPES 12,176
+#define MAX_CHOICES 13,204
+#define MAX_EXCLUDES 14,233
+enum ATYPEATYPE16,263
+  SHORT_TEXT,18,276
+  SHORT_TEXT, TEXT,18,276
+  CHOOSE,19,296
+  INTEGER,20,306
+  INTEGER, FLOAT,20,306
+  RANGE,21,324
+  RANGE, RANK,21,324
+  RANGE, RANK, DUMMY21,324
+static const char *atype_string[24,349
+typedef struct tp_choice *P_tp_choice;P_tp_choice37,563
+struct tp_choicetp_choice38,602
+typedef class ANSWER *P_ANSWER, **PP_ANSWER;PP_ANSWER45,691
+
+dialog.h,259
+typedef struct dialog_info_struct *dialogInfoType;dialogInfoType5,63
+struct dialog_info_struct dialog_info_struct6,114
+typedef struct dialog_return_struct *dialogReturnType;dialogReturnType13,149
+struct dialog_return_struct dialog_return_struct14,204
+
+getput.h,22
+#define _GETPUT_2,17
+
+query.h,79
+#define _QUERY_5,76
+typedef class QUERY *P_QUERY, **PP_QUERY;PP_QUERY14,196
+
+question.h,94
+#define _QUESTION_5,82
+typedef class QUESTION *P_QUESTION, **PP_QUESTION;PP_QUESTION11,162
+
+queue.h,0
+
+report.h,272
+#define _REPORT_10,155
+struct txt_struct txt_struct14,194
+struct ch_struct ch_struct20,267
+typedef union ADATA *P_ADATA, **PP_ADATA;PP_ADATA26,356
+union ADATA ADATA27,398
+typedef struct REPORT *P_REPORT, **PP_REPORT;PP_REPORT32,465
+struct REPORT REPORT33,511
+
+response.h,266
+#define _RESPONSE_6,113
+enum YN YN12,193
+enum YN { YES,12,193
+enum YN { YES, NONE 12,193
+typedef union RES_DATA *P_RES_DATA, **PP_RES_DATA;PP_RES_DATA14,217
+union RES_DATA RES_DATA15,268
+typedef class RESPONSE *P_RESPONSE, **PP_RESPONSE;PP_RESPONSE22,359
+
+result.h,202
+#define _RESULT_5,89
+enum R_STATUS R_STATUS11,169
+enum R_STATUS { NOT_COMPLETED,11,169
+enum R_STATUS { NOT_COMPLETED, COMPLETED 11,169
+typedef class RESULT *P_RESULT, **PP_RESULT;PP_RESULT13,214
+
+rpt_atom.h,26
+#define _RPT_ATOM_27,937
+
+section.h,151
+#define _SECTION_5,70
+#define _SECTION_VERSION_ 16,233
+#define MAX_QUERIES 17,262
+typedef class SECTION *P_SECTION, **PP_SECTION;PP_SECTION19,294
+
+stack.h,0
+
+survey.h,117
+#define _SURVEY_5,70
+#define _SURVEY_VERSION_ 18,303
+typedef class SURVEY *P_SURVEY, **PP_SURVEY;PP_SURVEY20,332
+
+answer.cc,632
+void ANSWER::set_version(6,55
+ANSWER::ANSWER(11,117
+ANSWER::~ANSWER(17,186
+void ANSWER::print(32,433
+void ANSWER::settype(51,862
+void ANSWER::settype(56,928
+void ANSWER::setminch(73,1231
+void ANSWER::setmaxch(78,1289
+void ANSWER::addexclude(83,1347
+void ANSWER::addchoice(95,1625
+int ANSWER::getnumch(104,1812
+int ANSWER::getminch(109,1862
+int ANSWER::getmaxch(114,1909
+P_tp_choice ANSWER::getchoices(119,1956
+ATYPE ANSWER::get_atype(124,2012
+const char * ANSWER::get_type(129,2065
+void ANSWER::panswer(134,2138
+void ANSWER::pversion(139,2197
+void ANSWER::readFromDisk(144,2280
+void ANSWER::writeToDisk(166,2765
+
+box.cc,16
+smart_box(4,26
+
+countQueries.cc,19
+countQueries(8,75
+
+dialog.cc,15
+dialog(18,266
+
+getput.cc,38
+void fputstr(3,21
+void fgetstr(8,90
+
+helpBox.cc,16
+helpBox(16,243
+
+initrpt.cc,20
+init_report(10,143
+
+query.cc,356
+void QUERY::set_version(8,72
+QUERY::QUERY(13,118
+QUERY::QUERY(19,179
+void QUERY::setname(26,288
+void QUERY::setquestion(32,392
+void QUERY::setanswer(37,458
+char * QUERY::getname(42,518
+P_QUESTION QUERY::getquestion(47,576
+P_ANSWER QUERY::getanswer(52,639
+void QUERY::print(57,696
+void QUERY::readFromDisk(65,862
+void QUERY::writeToDisk(75,1067
+
+question.cc,280
+QUESTION::QUESTION(6,59
+QUESTION::QUESTION(12,127
+void QUESTION::settext(19,248
+char * QUESTION::gettext(25,362
+void QUESTION::print(30,426
+void QUESTION::pversion(35,532
+void QUESTION::operator=42,644
+void QUESTION::readFromDisk(48,763
+void QUESTION::writeToDisk(56,906
+
+queue.cc,238
+template<class T> QUEUE<T>::QUEUE(3,20
+template<class T> QUEUE<T>::~QUEUE(8,91
+void QUEUE<T>::add(13,147
+template<class T> T QUEUE<T>::pop(18,188
+template<class T> T QUEUE<T>::next(26,284
+template<class T> int QUEUE<T>::size(43,479
+
+readdir.cc,11
+main(5,44
+
+rescp.cc,26
+char *f2 3,21
+main(6,56
+
+response.cc,532
+RESPONSE::RESPONSE(7,67
+RESPONSE::RESPONSE(13,169
+RESPONSE::~RESPONSE(20,281
+RESPONSE::setComment(31,473
+RESPONSE::setData(37,552
+void RESPONSE::setData(41,610
+void RESPONSE::setData(45,673
+void RESPONSE::setData(49,740
+ATYPE RESPONSE::getType(58,875
+const char * RESPONSE::getTypeName(62,930
+float RESPONSE::getFloatData(69,1069
+char * RESPONSE::getTextData(73,1138
+char * RESPONSE::getComment(80,1269
+int *RESPONSE::getChoiceRankData(86,1323
+void RESPONSE::readFromDisk(90,1395
+void RESPONSE::writeToDisk(132,2269
+
+result.cc,373
+RESULT::RESULT(3,21
+RESULT::~RESULT(16,301
+void RESULT::addResponse(26,471
+void RESULT::setExcluded(31,568
+int RESULT::setTo1stResponse(39,704
+P_RESPONSE RESULT::getNextResponse(46,836
+int RESULT::getNumResponses(58,1068
+int RESULT::getLastQueryNum(62,1126
+int RESULT::getLastSectionNum(66,1184
+void RESULT::readFromDisk(70,1246
+void RESULT::writeToDisk(94,1712
+
+rpgen.cc,422
+P_QUERY aq[22,353
+int numQueries;24,374
+int numSections;25,390
+int QperSect[26,407
+int LOCAL_USER 28,426
+int DO_LOCAL_STUFF 29,446
+int ANONYMOUS 30,470
+P_REPORT all_reports[32,490
+P_QUERY  all_queries[33,517
+update_report(36,550
+setup_reports(121,2458
+run_report(174,3714
+print_indented(273,5813
+displayChoices(335,6649
+displayComments(408,8473
+displayText(438,9125
+print_results(469,9797
+main(512,10631
+
+section.cc,504
+void SECTION::set_version(5,37
+SECTION::SECTION(10,120
+SECTION::~SECTION(15,187
+void SECTION::setname(23,285
+void SECTION::gotoQuery(28,394
+int SECTION::set_to_first_query(32,449
+char * SECTION::get_current_query_name(39,577
+P_QUESTION SECTION::get_current_question(46,721
+P_ANSWER SECTION::get_current_answer(53,875
+int SECTION::set_to_next_query(60,1021
+void SECTION::add_query(67,1175
+char * SECTION::getname(79,1380
+void SECTION::readFromDisk(83,1442
+void SECTION::writeToDisk(103,1766
+
+srvtool.cc,1940
+#define _BSD_SIGNALS 17,262
+#define NO_RESIZE 24,393
+#define AFTER_RESIZE 25,416
+#define ESCAPE_KEY 26,439
+#define PREV_KEY 27,463
+#define NEXT_KEY 28,487
+enum QSTATE QSTATE68,1257
+  NORMAL,69,1271
+  NORMAL, IN_INTRO,69,1271
+  NORMAL, IN_INTRO, IN_HELP,69,1271
+  IN_QUERY,70,1300
+  IN_QUERY, IN_CHOOSER,70,1300
+  IN_QUERY, IN_CHOOSER, IN_COMMENT,70,1300
+  IN_TEXT,71,1336
+  IN_TEXT, IN_RANKER,71,1336
+  IN_TEXT, IN_RANKER, IN_SHORT_TEXT71,1336
+WINDOW *winMain;78,1419
+WINDOW *winQuery;79,1436
+int        curSectionNum,81,1455
+int        curSectionNum, curQueryNum;81,1455
+int        questionNumber 82,1494
+char       result_file_name[84,1540
+char      *result_file_dir 85,1574
+P_SURVEY   theSurvey;87,1646
+P_RESULT   theResults;88,1668
+P_QUERY    allQueries[89,1691
+P_QUERY    curQuery;90,1722
+P_ANSWER   thisAnswer;91,1743
+P_SECTION  thisSection;92,1766
+P_RESPONSE thisResponse;93,1790
+P_RESPONSE allResponses[94,1815
+QSTATE     curState 96,1846
+int        caughtResize 97,1876
+char      *thoseExcluded[98,1905
+int        numExcluded 99,1936
+int        qpSection[101,1965
+int        numSections;102,1991
+int        PrevOrNext 104,2016
+#define _BSD_SIGNALS 110,2069
+struct sigvec sv_resize;111,2092
+saveResults(120,2169
+drawPage(172,3161
+drawIntroScreen(197,3574
+drawInfoScreen(253,4427
+drawThankyouScreen(318,5450
+drawQueryScreen(340,5809
+drawCommentScreen(416,7355
+void die(450,7895
+displayChoices(459,8006
+displayRankedItems(511,8828
+redrawTextScreen(551,9597
+getText(562,9837
+getShortText(778,13992
+ranker(856,15458
+chooser(991,17908
+saveQuit(1194,22152
+getAnswer(1219,22873
+void adjust_window(1374,25707
+sect_excluded(1424,26540
+query_excluded(1444,26833
+updateExcludes(1464,27097
+excluded_query(1525,28036
+excluded_section(1542,28283
+is_continuing(1559,28547
+moveBack1(1702,31958
+moveAhead1(1733,32511
+setToPrevious(1761,33071
+setToNext(1788,33541
+main(1808,33840
+
+survey.cc,546
+void SURVEY::set_version(5,35
+SURVEY::SURVEY(11,117
+SURVEY::~SURVEY(17,181
+void SURVEY::setname(28,322
+int SURVEY::set_to_first_section(34,428
+void SURVEY::gotoSection(42,562
+char * SURVEY::get_current_section_name(46,622
+P_SECTION SURVEY::get_current_section(54,773
+int SURVEY::set_to_next_section(62,914
+void SURVEY::add_section(70,1078
+char * SURVEY::getname(83,1301
+char * SURVEY::getIntro(88,1361
+void SURVEY::psurvey(93,1413
+void SURVEY::pversion(98,1475
+void SURVEY::readFromDisk(103,1558
+void SURVEY::writeToDisk(126,1964
+
+tabulate.cc,17
+tabulate(18,306
+
+scc.y,1228
+  char *pch,10,170
+  char *pch, ch,10,170
+  char *pch, ch, *file_name;10,170
+  int num_lines 11,199
+  int num_comments 12,220
+  int num_errors 13,244
+  int num_ch_printed 14,266
+  int STATE 15,292
+  FILE *testDataFile;16,309
+  static SURVEY new_survey;23,408
+  P_SECTION ptSsection;30,516
+  P_QUERY ptSquery;31,540
+  P_QUESTION ptSquestion;32,560
+  P_ANSWER ptSanswer;33,586
+STRING	68,1445
+    printf("Usage: %s 141,3286
+  printf("compiled survey with %d lines,153,3508
+    STATE 334,6488
+    break;335,6504
+    STATE 340,6616
+    break;341,6632
+    STATE 345,6703
+    ptSsection 347,6776
+    break;349,6839
+    STATE 352,6910
+    ptSquery 355,6975
+    break;356,7009
+    STATE 359,7092
+    ptSquestion 365,7215
+    break;366,7255
+    STATE 372,7412
+    break;373,7428
+    STATE 379,7604
+    break;380,7620
+    STATE 386,7781
+    break;387,7797
+parse_SURVEY(394,7854
+parse_INTRO(407,7986
+parse_QUERY(420,8117
+parse_QUESTION(434,8259
+parse_ANSWER(447,8394
+parse_CHOOSE(465,8655
+parse_RANK(480,8853
+parse_INTEGER(495,9045
+parse_FLOAT(510,9246
+parse_INT(525,9441
+parse_ELIPSES(546,9853
+parse_SHORT_TEXT(561,10085
+parse_TEXT(576,10295
+parse_EXCLUDE(591,10489
+parse_COMMA(604,10615

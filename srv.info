@@ -1,0 +1,26 @@
+                           Survey Tool Instructions
+                           ------------------------
+   
+   You are now beginning the Customer Satisfaction Survey.
+   
+   Most of the following questions are multiple choice.  In some cases, how
+   you answer a question will prompt you for further comments regarding the
+   initial question.  The maximum number of possible questions is XX.
+   
+   At the end of each question, you have four options:
+   
+           o PRESS RETURN to go to the next question
+           o PRESS C to comment on the current question
+           o PRESS R to redo a question
+           o PRESS S to save your answer and quit
+   
+   You may save/quit at any time during the survey and restart it again at
+   your convenience.  The survey will begin again where you left off.
+   
+   You may press the ESCAPE key at any time during the survey to see get
+   information about additional features, which include:
+   
+           Control-d    exit from a text window
+           Control-p    go back one question
+           Control-n    go forward one question
+
