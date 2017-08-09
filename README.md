@@ -1,7 +1,7 @@
 # an ancient Multi User Survey Tool
 
 This tool is a prototype multi user survey tool using a curses
-interface meant to conduct a surveys and collect the results after
+interface meant to conduct surveys and collect the results after
 which, the results would be aggregated, summarized, and analyzed.
 
 The person in the conductor role would create the surveys in the survey
