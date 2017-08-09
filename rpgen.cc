@@ -39,13 +39,13 @@ update_report(int s_index, P_RESPONSE the_response, char *user_name)
   P_REPORT this_report = all_reports[s_index];
   P_QUERY  this_query  = all_queries[s_index];
   ATYPE the_type = the_response->getType();
-  
+
   int n, i;
-  
+
   int *tmp_choices;
-  
+
   char *comment;
-  
+
   switch (the_type) {
   case DUMMY:
     break;
@@ -94,7 +94,7 @@ update_report(int s_index, P_RESPONSE the_response, char *user_name)
     } else {
       (this_report->remote_answered)++;
     }
-    
+
     comment = the_response->getComment();
     if (comment) {
       if (strlen(comment)) {
@@ -105,13 +105,13 @@ update_report(int s_index, P_RESPONSE the_response, char *user_name)
 	comment = (char *) 0;
       }
     }
-      
+
     n = this_report->theData.txtAnswers.n;
     (this_report->theData.txtAnswers.n)++;
     this_report->theData.txtAnswers.list[n] = the_response->getTextData();
     this_report->theData.txtAnswers.name[n] = strdup(user_name);
     break;
-      
+
   default:
     cerr << "Warning: Unknown query type encountered\n";
   }
@@ -131,18 +131,18 @@ setup_reports()
   for (i = 0; i < numSections; i++)
     for (j = 0; j < QperSect[i]; j++)
       all_queries[c++] = aq[i][j];
-  
+
   /*
   ** allocate the memory needed for all the reports and set the
   ** type for each one in advance
   */
-  
+
   for (i = 0; i < numQueries; i++)
   {
     all_reports[i] = new REPORT;
 
     all_reports[i]->qtype = all_queries[i]->getType();
-    
+
     all_reports[i]->num_answered = 0;
     all_reports[i]->local_answered = 0;
     all_reports[i]->remote_answered = 0;
@@ -192,11 +192,11 @@ run_report(P_SURVEY theSurvey, char *resultdir)
   P_RESPONSE    the_response;
   char          *uid;
   char          *user_name;
-  
+
   int i;
-  
+
   dirp = opendir(resultdir);
-  
+
   /*
   ** skip over the dot and dot-dot directories
   */
@@ -222,7 +222,7 @@ run_report(P_SURVEY theSurvey, char *resultdir)
       fprintf(stderr, "error: got NULL from fopen: [%s]\n", fname);
       exit(1);
     }
-    
+
     fclose(fpResult);
 
     uid = direntp->d_name;
@@ -236,7 +236,7 @@ run_report(P_SURVEY theSurvey, char *resultdir)
         sprintf(fname, "UID = %s (expired account)", uid);
         user_name = strdup(fname);
     }
-    
+
     /*
     ** check to see if this user is local or not by looking at the answer
     ** to question number 3.
@@ -260,7 +260,7 @@ run_report(P_SURVEY theSurvey, char *resultdir)
       LOCAL_USER = (the_response->getChoiceRankData())[0];
     else
       LOCAL_USER = 1;
-    
+
 /*
     printf ("LOCAL USER = %d\n", LOCAL_USER);
 */
@@ -286,7 +286,7 @@ print_indented(int n, char *s)
   char x;
 
   int l = strlen(s);
-  
+
   if (strlen(s))
   {
     x = s[strlen(s)-1];
@@ -297,7 +297,7 @@ print_indented(int n, char *s)
       l--;
     }
   }
-  
+
   if (strlen(s))
     done = 0;
   else
@@ -308,7 +308,7 @@ print_indented(int n, char *s)
     /*
     **    indent 'n' spaces
     **    print each character until NL
-    **   
+    **
     */
 
     for (i = 0; i < n; i++)
@@ -364,7 +364,7 @@ displayChoices(int qnum)
     local_ans  = rpt->local_answered;
     remote_ans = rpt->remote_answered;
     total_ans  = rpt->num_answered;
-    
+
     local_cnt  = rpt->theData.chAnswers.cnt_local[i];
     remote_cnt = rpt->theData.chAnswers.cnt_remote[i];
     total_cnt  = rpt->theData.chAnswers.cnt_all[i];
@@ -409,7 +409,6 @@ displayChoices(int qnum)
   }
 
   printf("\n\n");
-  
 }
 
 void
@@ -429,7 +428,7 @@ displayComments(int qnum)
     printf ("COMMENTS: (%d people commented)\n", real_numComments);
   else
     numComments = 0;
-  
+
   for (i = 0; i < numComments; i++)
   {
      if (strlen(rpt->comment_list[i]) > 2)
@@ -454,11 +453,11 @@ displayText(int qnum)
   for (i = 0; i < num_txt; i++)
      if (strlen(rpt->theData.txtAnswers.list[i]) > 2)
        real_num_txt++;
-  
+
   if (real_num_txt)
   {
     printf("ANSWERS: (%d people entered some text)\n", real_num_txt);
-    
+
     for (i = 0; i < num_txt; i++)
     {
       if (strlen(rpt->theData.txtAnswers.list[i]) > 2)
@@ -479,18 +478,17 @@ print_results()
   cout << "\nSURVEY RESULTS\n-------------\n\n";
   ATYPE type;
   char *qtext;
-  
+
   int i;
-  
 
   for (i = 0; i < numQueries; i++)
   {
     type = all_queries[i]->getType();
-    
+
     qtext = all_queries[i]->getname();
     printf("\nQuestion #%3d -- %s\n", i+1, qtext);
     delete qtext;
-    
+
     printf("  %d user", all_reports[i]->num_answered);
 
     if (all_reports[i]->num_answered != 1)
@@ -503,18 +501,17 @@ print_results()
     qtext = all_queries[i]->getquestion()->gettext();
     print_indented(2, qtext);
     printf("\n\n");
-    
+
     delete qtext;
-    
+
     if (type == CHOOSE)
       displayChoices(i);
     else if (type == TEXT)
-      displayText(i); 
+      displayText(i);
 
     displayComments(i);
   }
 }
-
 
 int
 main(int argc, char **argv)
@@ -535,7 +532,7 @@ main(int argc, char **argv)
     fpSurvey = fopen(argv[1], "r");
   else
     fpSurvey = fopen("./obj-survey", "r");
-  
+
   if (fpSurvey == NULL)
   {
     cerr << "Can't open survey file\n";
@@ -543,7 +540,7 @@ main(int argc, char **argv)
   }
 
   argc--;
-  
+
   sprintf(resultdir,"./");
 
   if (argc)
@@ -552,7 +549,7 @@ main(int argc, char **argv)
 /*
 ** read in the survey
 */
-  
+
   theSurvey.readFromDisk(fpSurvey);
   numQueries = countQueries(&theSurvey, aq,
 			    &numSections, QperSect);

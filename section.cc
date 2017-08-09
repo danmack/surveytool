@@ -91,10 +91,10 @@ void SECTION::readFromDisk(FILE *fp)
 
   fgetstr(fp, section_name);
   fscanf(fp, "\n");
-  
+
   fscanf(fp, "%d", &num_queries);
   fscanf(fp, "\n");
-  
+
   for (i = 0; i < num_queries; i++)
   {
     ar_queries[i] = new QUERY;

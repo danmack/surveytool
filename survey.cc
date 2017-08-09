@@ -113,12 +113,12 @@ void SURVEY::readFromDisk(FILE *fp)
 
   fgetstr(fp, survey_name);
   fscanf(fp, "%c", &tmp);
-  
+
   intro_text = new char[2048];
   fgetstr(fp, intro_text);
   fscanf(fp, "%d", &num_sections);
   fscanf(fp, "\n");
-  
+
   for (i = 0; i < num_sections; i++)
   {
     the_sections[i] = new SECTION;

@@ -22,9 +22,9 @@ tabulate(SURVEY &theSurvey, char *resultdir)
   FILE          *fpResult;
   char          fname[256];
   RESULT        theResult(theSurvey.getname());
-  
+
   dirp = opendir(resultdir);
-  
+
   /*
   ** skip over the dot and dot-dot directories
   */
@@ -42,7 +42,7 @@ tabulate(SURVEY &theSurvey, char *resultdir)
     fpResult = fopen(fname, "r");
     theResult.readFromDisk(fpResult);
     fclose(fpResult);
-    
+
     cout << "Just read " << fname << "\t Survey is ";
     if (theResult.getStatus() == COMPLETED)
       cout << "Completed.\n";

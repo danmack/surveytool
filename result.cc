@@ -15,10 +15,10 @@ RESULT::RESULT(char *s, int max) {
 
 RESULT::~RESULT() {
   int i;
-  
+
   for (i = 0; i < num_excluded; i++)
     delete thoseExcluded[i];
-  
+
   for (i = 0; i < num_responses; i++)
     delete theResponses[i];
 }
@@ -30,7 +30,7 @@ void RESULT::addResponse(P_RESPONSE r, int n) {
 
 void RESULT::setExcluded(int n, char *s[]) {
   int i;
-  
+
   num_excluded  = n;
   for (i = 0; i < n; i++)
     thoseExcluded[i] = s[i];
@@ -70,7 +70,7 @@ int RESULT::getLastSectionNum() {
 void RESULT::readFromDisk(FILE *fp) {
   int i;
   char tmp;
-  
+
   fgetstr(fp, survey_name);
   fscanf(fp, "%d %d %d %d %d %d\n",
 	 &raw_location, &num_responses,
@@ -93,7 +93,7 @@ void RESULT::readFromDisk(FILE *fp) {
 
 void RESULT::writeToDisk(FILE *fp) {
   int i;
-  
+
   fputstr(fp, survey_name);
   fprintf(fp, "%d %d %d %d %d %d\n",
 	  raw_location, num_responses,
@@ -103,9 +103,9 @@ void RESULT::writeToDisk(FILE *fp) {
 
   for (i = 0; i < num_excluded; i++)
     fputstr(fp, thoseExcluded[i]);
-  
+
   fprintf(fp, "\n");
-  
+
   for (i = 0; i < num_responses; i++)
   {
     theResponses[i]->writeToDisk(fp);

@@ -14,11 +14,11 @@ init_report(SURVEY &theSurvey)
 
   P_SECTION      thisSection;
   P_QUERY        thisQuery;
-  
+
   int            section_status;
   int            query_status;
   int            atom_number        = 0;
-  
+
   section_status = theSurvey->set_to_first_section();
   while (section_status != -1)
   {
@@ -29,12 +29,10 @@ init_report(SURVEY &theSurvey)
     {
       thisAnswer = thisSection->get_current_answer();
       queryType  = thisAnswer->get_atype();
-      
+
       atom_array[atom_number++] = new RPT_ATOM(queryType);
     }
-    
-  }
-  
 
+  }
   return atom_array;
 }

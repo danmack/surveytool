@@ -20,7 +20,7 @@ RESPONSE::RESPONSE(ATYPE rtype) {
 RESPONSE::~RESPONSE() {
   if (comment)
     delete comment;
-  
+
   if (response_type == TEXT || response_type == SHORT_TEXT)
     if (response_data.text)
       delete response_data.text;
@@ -89,7 +89,7 @@ int *RESPONSE::getChoiceRankData() {
 void RESPONSE::readFromDisk(FILE *fp) {
   int i;
   char tmp, tmp2;
-  
+
   fscanf(fp, "%d %d\n", &response_type, &comment_status);
 
   switch (response_type)
@@ -110,7 +110,7 @@ void RESPONSE::readFromDisk(FILE *fp) {
   case CHOOSE:
     for (i = 0; i < 10; i++)
       fscanf(fp, "%d", &response_data.choices[i]);
-    fscanf(fp, "%c", &tmp);    
+    fscanf(fp, "%c", &tmp);
     fscanf(fp, "%c", &tmp);
   case DUMMY:
     break;
@@ -132,7 +132,7 @@ void RESPONSE::writeToDisk(FILE *fp) {
   int i;
 
   fprintf(fp, "%d %d\n", response_type, comment_status);
-  
+
   switch (response_type)
   {
   case INTEGER:

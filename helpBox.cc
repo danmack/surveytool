@@ -27,13 +27,13 @@ helpBox(WINDOW *parent, int LINES, int COLS) {
 
   ht = 15;
   wd = 60;
-  
+
   yp = (LINES/2) - (ht/2);
   xp = (COLS/2)  - (wd/2);
 
   popWin = subwin(parent, ht, wd, yp-2, xp);
   wclear(popWin);
-  
+
   wmove(popWin, 1, 20);
   wstandout(popWin);
   wprintw(popWin, "Survey Tool Help");

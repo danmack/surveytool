@@ -16,7 +16,7 @@ countQueries(P_SURVEY thesurvey,
 
   int qnum = 0;
   *snum = 0;
-  
+
   section_result = thesurvey->set_to_first_section();
   thisSection    = thesurvey->get_current_section();
   while (section_result != -1)

@@ -28,13 +28,13 @@ dialog(WINDOW *parent, int LINES, int COLS) {
 
   ht = 13;
   wd = 48;
-  
+
   yp = (LINES/2) - (ht/2);
   xp = (COLS/2)  - (wd/2);
 
   popWin = subwin(parent, ht, wd, yp-2, xp);
   wclear(popWin);
-  
+
   wmove(popWin, 1, 15);
   wstandout(popWin);
   wprintw(popWin, "Survey Tool Options");
@@ -86,7 +86,7 @@ dialog(WINDOW *parent, int LINES, int COLS) {
       wmove(popWin, 10, 3);
       wprintw(popWin, "Really save/quit (y/N)? ");
       wrefresh(popWin);
-      
+
       ch = wgetch(popWin);
 
       if (ch == 'y' || ch == 'Y')

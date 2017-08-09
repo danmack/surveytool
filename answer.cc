@@ -25,7 +25,7 @@ ANSWER::~ANSWER()
   {
     if (choices[i].text)
       delete choices[i].text;
-    
+
     for (j = 0; j < choices[i].num_excludes; j++)
       delete choices[i].excludes[j];
   }
@@ -58,7 +58,7 @@ void ANSWER::settype(ATYPE newtype)
 void ANSWER::settype(char *newtype)
 {
   int i = 0, j = 0, DONE = 0;
-  
+
   while (!DONE && i < NUM_ATYPES)
   {
     j = i + NUM_ATYPES;
@@ -89,8 +89,8 @@ void ANSWER::addexclude(char *txt)
     int n = choices[num_choices-1].num_excludes;
     choices[num_choices-1].num_excludes++;
     choices[num_choices-1].excludes[n] = strdup(txt);
-    
-//    strcpy(choices[num_choices-1].excludes[n].text, txt);
+
+    // strcpy(choices[num_choices-1].excludes[n].text, txt);
   }
 }
 
@@ -98,8 +98,8 @@ void ANSWER::addchoice(char *txt)
 {
   printf("ANDEBUG [%s]\n", txt);
   choices[num_choices].text = strdup(txt);
-  
-//  strcpy(choices[num_choices].text, txt);
+
+  //  strcpy(choices[num_choices].text, txt);
   choices[num_choices].num_excludes = 0;
   num_choices++;
 }
@@ -151,12 +151,12 @@ void ANSWER::readFromDisk(FILE *fp)
   fscanf(fp, "%d %d %d %d %d", &version, &answer_type, &num_choices,
 	 &min_pick, &max_pick);
   fscanf(fp, "\n");
-  
+
   for ( i = 0; i < num_choices; i++ )
   {
     fgetstr(fp, BigStrTmp);
     choices[i].text = strdup(BigStrTmp);
-    
+
     fscanf(fp, "%d\n", &choices[i].num_excludes);
     for ( j = 0 ; j < choices[i].num_excludes; j++ )
     {

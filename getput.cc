@@ -21,7 +21,7 @@ void fgetstr(FILE *fp, char *s)
       fprintf(stderr, "ERROR: results data corrupt or otherwise invalid - aborting!\n");
       exit(2);
     }
-    
+
     if (tmp == '\0')
     {
       done = 1;

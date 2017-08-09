@@ -24,7 +24,7 @@ QUERY::QUERY(char *name)
   strncpy(query_name, name, 127);
   query_name[127] = '\0';
 }
-  
+
 void QUERY::setname(char * newname)
 {
   strncpy(query_name, newname, 127);
