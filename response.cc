@@ -98,7 +98,7 @@ void RESPONSE::readFromDisk(FILE *fp) {
     fscanf(fp, "%d\n", &response_data.numInt);
     break;
   case FLOAT:
-    fscanf(fp, "%d\n", &response_data.numFloat);
+    fscanf(fp, "%f\n", &response_data.numFloat);
     break;
   case TEXT:
   case SHORT_TEXT:
@@ -139,7 +139,7 @@ void RESPONSE::writeToDisk(FILE *fp) {
     fprintf(fp, "%d\n", response_data.numInt);
     break;
   case FLOAT:
-    fprintf(fp, "%d\n", response_data.numFloat);
+    fprintf(fp, "%f\n", response_data.numFloat);
     break;
   case TEXT:
   case SHORT_TEXT:
