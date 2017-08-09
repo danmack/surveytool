@@ -47,7 +47,7 @@ class ANSWER {
 public:
   ANSWER();
   ~ANSWER();
-  
+
   void set_version();
 
 // functions used by the scanner
@@ -60,7 +60,7 @@ public:
   void addchoice(char *txt);
 
 // functions used by the survey tool
-  
+
   int         getnumch();
   int         getminch();
   int         getmaxch();
@@ -87,4 +87,4 @@ private:
 };
 
 #endif
-
+

@@ -12,6 +12,6 @@ struct dialog_info_struct {
 
 typedef struct dialog_return_struct *dialogReturnType;
 struct dialog_return_struct {
-  
+
 
 }

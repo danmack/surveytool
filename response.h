@@ -36,7 +36,7 @@ public:
   void  setData(int i, int *iArray);
 
   void  setComment(char *s);
-  
+
   ATYPE getType();
   void  setType(ATYPE rtype) { response_type = rtype; };
   const char *getTypeName();
@@ -52,4 +52,4 @@ public:
 };
 
 #endif
-
+

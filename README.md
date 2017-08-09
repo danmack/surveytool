@@ -15,7 +15,7 @@ once.  For archeological reasons this has been resurrected and put
 into GitHub.  There is a lot of bad programming in here for which I am
 to blame but it does provide what I think is a cool survey description language
 and a curses user interface allowing the user to convey choice, ranking, and
-ther survey actions.
+other survey actions.
 
 I will probably modernize this for fun the next time I am on sabbatical. The main
 purpose of putting this on github is for preservation sake.

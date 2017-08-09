@@ -21,7 +21,7 @@ public:
   void setname(char * newname);
   void setquestion(P_QUESTION q);
   void setanswer(P_ANSWER a);
-  
+
   // survey tool funcs
   char * getname();
   P_QUESTION getquestion();
@@ -43,4 +43,4 @@ private:
 };
 
 #endif
-
+

@@ -29,7 +29,7 @@ public:
     else
       return (T) 0;
   }
-  
+
   T next()
   {
     if (p > v)
@@ -46,7 +46,7 @@ public:
     }
     return (T) 0;
   }
-  
+
   int size() const
   {
     return p-v;

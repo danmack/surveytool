@@ -26,7 +26,7 @@ public:
 						  };
   void         markCompleted() { status = COMPLETED; };
   void         markNotCompleted() { status = NOT_COMPLETED; };
-  
+
   P_RESPONSE   getNextResponse();
   int          getNumResponses();
   int          getLastQueryNum();
@@ -52,4 +52,4 @@ private:
 };
 
 #endif
-
+
