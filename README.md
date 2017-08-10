@@ -25,12 +25,14 @@ Sierra and with a little effort it has been used on IRIX, Linux,
 SmartOS, and FreeBSD.  I am pretty sure it needs some C++ updates
 for it to work with clang.
 
-Enjoy,
+## instructions
 
-Dan
-
-
-
-
-
+```bash
+ # build the tools using make (should work on OS X)
+ % make
+ # compile the example survey simplesurvey.sdl
+ % ./scc simplesurvey.sdl
+ # run the survey
+ % ./srv obj-survey
+```
 

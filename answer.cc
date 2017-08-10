@@ -96,7 +96,6 @@ void ANSWER::addexclude(char *txt)
 
 void ANSWER::addchoice(char *txt)
 {
-  printf("ANDEBUG [%s]\n", txt);
   choices[num_choices].text = strdup(txt);
 
   //  strcpy(choices[num_choices].text, txt);

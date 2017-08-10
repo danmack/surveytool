@@ -127,7 +127,6 @@ main(int argc, char *argv[])
   int survey_data;
   int status;
 
-
   switch(argc)
   {
   case 1:
@@ -186,7 +185,6 @@ add_newlines(char *s, int l)
     if (s[i] == 10)		// newline
       num_lines++;
 }
-
 
 void
 parse_LP(char *yytext)
@@ -319,7 +317,6 @@ parse_SECTION(char *yytext)
     stp_error(yytext);
   }
 }
-
 
 void
 parse_STRING(char *yytext)

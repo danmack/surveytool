@@ -1,0 +1,78 @@
+# --------------------------------------------------------------------
+# A test survey - demonstrate language and UI features
+# --------------------------------------------------------------------
+
+(survey "Simple Test Survey")
+
+(intro "
+
+   Welcome to this test survey - demonstrating:
+     - ranking
+     - short text entry
+     - conditional exclusion of questions
+     - multiple and single choice answers
+ "
+)
+
+# ---------------------------------------------
+# I.  This is a comment
+# ---------------------------------------------
+
+(section "Main : Section One"
+
+  (query "rank test"
+    (question "Rank the following items in order of the most liked to the least liked:")
+    (answer rank ("apple")("orange")("carrot")("tomato")("celery")))
+
+  (query "have pet"
+    (question "Do you have a pet?")
+    (answer choose
+      ("Yes")
+      ("No" exclude("Pets"))
+    )
+  )
+)
+
+(section "Pets"
+
+  (query "petname"
+    (question "What is your pet's name?")
+    (answer short-text)
+  )
+
+  (query "walkfreq"
+    (question "How often do you walk your pet (choose any that apply):")
+    (answer choose 1 ..
+      ("Never")
+      ("Morning" exclude("catcheck"))
+      ("Afternoon" exclude("catcheck"))
+      ("In the dark" exclude("catcheck"))
+      ("Once per day" exclude("catcheck"))
+     )
+  )
+
+  (query "pet prefs"
+    (question "Please rank by importance the following pet preferences:")
+    (answer rank
+      ("Kibble")   ("Bits")
+      ("Toys") ("Squirrel")
+      ("Walking")
+    )
+  )
+
+  (query "catcheck"
+    (question "Is your pet a cat?")
+    (answer choose
+      ("Yes")
+      ("No")
+    )
+  )
+)
+
+(section "Wrap-up"
+  (query "name"
+    (question "Please enter your name:")
+    (answer short-text)
+  )
+)
+
