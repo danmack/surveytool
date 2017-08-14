@@ -385,18 +385,17 @@ drawQueryScreen()
     break;
   case IN_SHORT_TEXT:
     printw("Please type in your response and press RETURN.");
-    move(LINES - 1, 10);
+    move(LINES - 1, 3);
     printw("Use Backspace/Delete to correct your mistakes.");
     break;
   case IN_RANKER:
-    printw(
-      "Press the digit corresponding to the highest ranked item, then the");
-    move(LINES - 1, 10);
-    printw(
-      "2nd most highest, etc.  When all of the items have been ranked,");
-    move(LINES - 0, 10);
-    printw(
-      "press the RETURN key.  Use Backspace/Delete to correct your mistakes.");
+    printw("Rank the items by pressing digits, highest to lowest");
+    move(LINES - 1, 3);
+    printw("Press the ");
+    standout();
+    printw("RETURN");
+    standend();
+    printw(" key when finished.");
     break;
   default:
     exit(1);
