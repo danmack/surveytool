@@ -74,7 +74,7 @@ enum QSTATE {
   IN_TEXT, IN_RANKER, IN_SHORT_TEXT
 };
 
-char * COMMENTMSG = "Please enter your comment (press control-d to exit):";
+const char * COMMENTMSG = "Please enter your comment (press control-d to exit):";
 
 /*
 ** An evil mess of global variables
@@ -165,7 +165,6 @@ saveResults()
   }
 }
 
-
 int
 drawPage(char *txt, int n)
 {
@@ -189,7 +188,6 @@ drawPage(char *txt, int n)
   }
   return 0;
 }
-
 
 void
 drawIntroScreen()
@@ -403,14 +401,12 @@ drawQueryScreen()
   default:
     exit(1);
   }
-
   refresh();
   wrefresh(winQuery);
 
   delete (qtext);
   delete (qname);
 }
-
 
 void
 drawCommentScreen()
@@ -546,7 +542,7 @@ displayRankedItems(int y, int n, P_tp_choice choices,
 }
 
 void
-redrawTextScreen(char *header_text, char *iText)
+redrawTextScreen(const char *header_text, char *iText)
 {
   int i;
   wmove(winQuery, 0, 0);
@@ -557,9 +553,9 @@ redrawTextScreen(char *header_text, char *iText)
 }
 
 char *
-getText(char *header_text, char *prev_text)
+getText(const char *header_text, char *prev_text)
 {
-  // get some lines of text from the user.
+  // a real basic text entry widget implementation
 
   int numChars = 0;
   int done     = 0;
@@ -857,6 +853,9 @@ getShortText()
 void
 ranker()
 {
+  // user interface allowing the user to rank a list of items
+  // with dynamic feedback
+
   int i, done, j;
   char ch;
   P_tp_choice choices = thisAnswer->getchoices();
@@ -988,7 +987,6 @@ ranker()
   thisResponse->setData(j, copy_of_selected);
 }
 
-
 int
 chooser(int *prev_selected)
 {
@@ -1016,9 +1014,7 @@ chooser(int *prev_selected)
 						       // of what\'s selected
   int * copy_of_selected = new int[MAX_CHOICES];
 
-/*
-  display the choices available
-*/
+  // display the choices available
 
   if (!prev_selected)
     for ( i = 0; i < MAX_CHOICES; i++ )
@@ -1092,7 +1088,7 @@ chooser(int *prev_selected)
       for (i = 0; i < MAX_CHOICES; i++)
 	copy_of_selected[i] = selected[i];
       thisResponse->setData(j, copy_of_selected);
-      delete copy_of_selected;
+      delete[] copy_of_selected;
       updateExcludes();
       setToPrevious();
       return -1;
@@ -1102,7 +1098,7 @@ chooser(int *prev_selected)
       for (i = 0; i < MAX_CHOICES; i++)
 	copy_of_selected[i] = selected[i];
       thisResponse->setData(j, copy_of_selected);
-      delete copy_of_selected;
+      delete[] copy_of_selected;
       updateExcludes();
       setToNext();
       return 1;
@@ -1188,7 +1184,7 @@ chooser(int *prev_selected)
     copy_of_selected[i] = selected[i];
 
   thisResponse->setData(j, copy_of_selected);
-  delete copy_of_selected;
+  delete[] copy_of_selected;
   return 0;
 }
 
@@ -1233,9 +1229,7 @@ getAnswer()
   thisAnswer = thisSection->get_current_answer();
   queryType = thisAnswer->get_atype();
 
-  /*
-  ** only allocate a new response object if we need one
-  */
+  // only allocate a new response object if we need one
 
   if (allResponses[questionNumber-1] == 0)
     thisResponse = allResponses[questionNumber-1] = new RESPONSE(queryType);
@@ -1316,10 +1310,11 @@ getAnswer()
       ;
     }
 
-/*     At this point in time, the user has finished entering something for
-       the current question.  Pop a dialog box prompting the user for what
-       he or she would like to do next.
-*/
+    /*
+      At this point in time, the user has finished entering something for
+      the current question.  Pop a dialog box prompting the user for what
+      he or she would like to do next.
+    */
 
     ch = dialog(winQuery, LINES, COLS);
 
@@ -1456,7 +1451,6 @@ query_excluded(int s, int q)
   return 0;
 }
 
-
 void
 updateExcludes()
 {
@@ -1511,7 +1505,6 @@ updateExcludes()
       }
   }
 }
-
 
 //
 // if the current query name has been excluded,
@@ -1798,7 +1791,6 @@ setToNext()
       thereYet = 1;
   }
 }
-
 
 int
 main(int argc, char *argv[], char *environ[])

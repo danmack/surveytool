@@ -35,7 +35,7 @@
  /*
  ** stand up and be prototyped
  */
-     
+
  void parse_LP(char *yytext);
  void parse_RP(char *yytext);
  void parse_STRING(char *yytext);
@@ -87,7 +87,7 @@ INT             [0-9]+
 {SECTION}       parse_SECTION(yytext);
 {STRING}	{ add_newlines(yytext, yyleng); parse_STRING(yytext); }
 {SURVEY}	parse_SURVEY(yytext);
-{INTRO}         parse_INTRO(yytext);  
+{INTRO}         parse_INTRO(yytext);
 {QUERY}		parse_QUERY(yytext);
 {QUESTION}	parse_QUESTION(yytext);
 {ANSWER}	parse_ANSWER(yytext);
@@ -120,7 +120,7 @@ INT             [0-9]+
   num_lines++;
   num_errors++;
  }
-%%		
+%%
 int
 main(int argc, char *argv[])
 {
@@ -143,7 +143,7 @@ main(int argc, char *argv[])
   printf("scc (version 0.9.5)\n");
 
   yylex();
-  
+
   /*
   ** now we need to write the survey class out to disk
   ** the survey tool can then read in the structure
@@ -250,7 +250,7 @@ parse_RP(char *yytext)
     break;
   case 21:
     // time to add another section to the survey object
-    
+
     new_survey.add_section(ptSsection);
 
     STATE = 22;
@@ -261,7 +261,7 @@ parse_RP(char *yytext)
     // new_survey.add_query(ptSquery);
 
     ptSsection->add_query(ptSquery);
-    
+
     STATE = 21;
 
     // hmm, I think we also need to free up the memory associated with
@@ -358,7 +358,7 @@ parse_STRING(char *yytext)
     *(strrchr(yytext,'"')) = '\0';
 //    if (ptSquestion)
 //      delete (ptSquestion);
-    
+
     ptSquestion = new QUESTION(yytext);
     break;
   case 61:
@@ -452,7 +452,7 @@ parse_ANSWER(char *yytext)
     // create an instance of an ANSWER object
 //    if (ptSanswer)
 //      delete (ptSanswer);
-    
+
     ptSanswer = new ANSWER;
     STATE = 50;
     break;
@@ -584,7 +584,7 @@ parse_TEXT(char *yytext)
     break;
   default:
     stp_error(yytext);
-  }	 
+  }
 }
 
 void

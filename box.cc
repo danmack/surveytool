@@ -13,7 +13,6 @@ smart_box(WINDOW *win, int y, int x, int h, int w)
   mvwaddch(win, h+(y-1), w+(x-1), plus);       // bottom right corner
   mvwaddch(win, y, w+(x-1), plus);	       // upper right corner
 
-
   // draw the horizontal lines of the box
 
   for ( i = x+1; i < (w+(x-1)); i++)
@@ -29,5 +28,4 @@ smart_box(WINDOW *win, int y, int x, int h, int w)
     mvwaddch(win, i, x, bar);
     mvwaddch(win, i, w+(x-1), bar);
   }
-
 }
